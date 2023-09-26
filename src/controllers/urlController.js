@@ -30,5 +30,19 @@ module.exports = {
     } catch (error) {
       res.status(400).send("Erro ao adicionar ao banco");
     }
+  },
+  async getCode(req, res, next) {
+    
+    try {
+      const code = req.params.code;
+      const result = await Link.findOne({ where: { code } });
+      
+      result.hits++;
+      await result.save();
+
+      res.redirect(result.url);
+    } catch (error) {
+      res.status(404).send("Codigo invalido");
+    }
   }
 }
