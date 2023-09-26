@@ -3,9 +3,11 @@ const urlController = require("../controllers/urlController");
 
 const router = express.Router();
 
-router.route("/").get((req, res, next) => {
-  res.json({status: 'OK'});
-});
+router.route("/:code").get(urlController.getCode);
+
+// router.route("/").get((req, res, next) => {
+//   res.json({status: 'OK'});
+// });
 
 router.route("/").post(urlController.createShortUrl);
 
