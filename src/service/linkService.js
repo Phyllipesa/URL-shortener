@@ -1,11 +1,10 @@
 const Link = require('../models/linkModel');
 const generateCode = require('../logic/generateCode');
-const urlExists = require('../logic/urlExists');
 const HttpError = require('../util/httpError');
 
 module.exports = {
   async createShortUrlService(url) {
-    const infoUrl = await urlExists(url);
+    const infoUrl = await Link.findOne({ where: { url } });
     const domain = process.env.DOMAIN;
 
     if (infoUrl) {
