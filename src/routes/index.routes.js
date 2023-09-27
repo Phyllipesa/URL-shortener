@@ -1,16 +1,10 @@
-const express = require('express');
-const urlController = require("../controllers/urlController");
+const { Router } = require('express');
+const linkController = require("../controllers/linkController");
 
-const router = express.Router();
+const linkRoutes = Router();
 
-router.route("/:code").get(urlController.getCode);
+linkRoutes
+  .get("/:code", linkController.getCode)
+  .post("/", linkController.createShortUrl);
 
-// router.route("/").get((req, res, next) => {
-//   res.json({status: 'OK'});
-// });
-
-router.route("/").post(urlController.createShortUrl);
-
-
-
-module.exports = router;
+module.exports = linkRoutes;
