@@ -1,5 +1,5 @@
+const Generate = require('../logic/Generate');
 const Link = require('../models/linkModel');
-const generateCode = require('../logic/generateCode');
 const HttpError = require('../util/httpError');
 
 module.exports = {
@@ -12,10 +12,9 @@ module.exports = {
       
       return existeUrl;
     }
-
-    const code = generateCode();
-    const result = await Link.create({ url, code })
-    const newUrl = { newUrl: domain + result.code };
+    const code = Generate.generateCode();
+    const data = await Link.create({ url, code })
+    const newUrl = { newUrl: domain + data.code };
 
     return newUrl;
 },
