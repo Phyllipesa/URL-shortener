@@ -6,18 +6,17 @@ module.exports = {
   async createShortUrl(req, res, next) {
     const url = req.body.url;
 
-    if (!url) {
-      return next(new HttpError(400, "Invalid URL"))
-    }
-
     try {
+      if (!url) {
+        throw new HttpError(400, "Invalid URL");
+      }
+
       const result = await createShortUrlService(url);
       return res.status(201).send(result);
     } catch (error) {
-      next(error)
+      return next(error)
     }
   },
-
   async getCode(req, res, next) {
     try {
       const code = req.params.code;
