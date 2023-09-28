@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r dotenv/config src/index.js"
+    "start": "nodemon -r dotenv/config src/index.js",
+    "test": "mocha tests/**/*.test.js --exit",
+    "test:coverage": "nyc npm run test"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,10 @@
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "chai": "4.3",
+    "mocha": "10.0",
+    "nodemon": "^3.0.1",
+    "nyc": "^15.1.0",
+    "sinon": "11.1.1"
   }
 }
